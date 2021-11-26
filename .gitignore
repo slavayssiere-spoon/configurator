@@ -1,0 +1,13 @@
+__pycache__
+v1
+
+conf_pb2*.py
+groups_pb2*.py
+robots_pb2*.py
+conf.swagger.json
+
+proto/robots.proto
+proto/groups.proto
+
+google
+protoc_gen_openapiv2

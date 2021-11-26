@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package v1;
+
+option go_package = ".;v1";
+
+message Conf {
+	string email = 1;
+	string message = 2;
+}
+
+service configurator {
+	rpc Get (Conf) returns (Conf) {}
+}
