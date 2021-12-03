@@ -4,16 +4,18 @@ package configurator;
 
 option go_package = "github.com/slavayssiere-spoon/configurator";
 
+message alerts {
+	uint64 uptime = 1;
+	uint64 downtime = 2;
+	repeated string alert_list = 3;
+	bool alert_connect = 4;
+	bool alert_disconnect = 5;
+	bool only_workingday = 6;
+} 
+
 message Conf {
 	string identity = 1;
-	message alerts {
-		uint64 uptime = 1;
-		uint64 downtime = 2;
-		repeated string alert_list = 3;
-		bool alert_connect = 4;
-		bool alert_disconnect = 5;
-		bool only_workingday = 6;
-	}
+	alerts alerts = 2;
 }
 
 service configurator {

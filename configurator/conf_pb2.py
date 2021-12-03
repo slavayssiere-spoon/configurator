@@ -19,57 +19,57 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z*github.com/slavayssiere-spoon/configurator',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nconf.proto\x12\x0c\x63onfigurator\"\xa3\x01\n\x04\x43onf\x12\x10\n\x08identity\x18\x01 \x01(\t\x1a\x88\x01\n\x06\x61lerts\x12\x0e\n\x06uptime\x18\x01 \x01(\x04\x12\x10\n\x08\x64owntime\x18\x02 \x01(\x04\x12\x12\n\nalert_list\x18\x03 \x03(\t\x12\x15\n\ralert_connect\x18\x04 \x01(\x08\x12\x18\n\x10\x61lert_disconnect\x18\x05 \x01(\x08\x12\x17\n\x0fonly_workingday\x18\x06 \x01(\x08\x32?\n\x0c\x63onfigurator\x12/\n\x03Get\x12\x12.configurator.Conf\x1a\x12.configurator.Conf\"\x00\x42,Z*github.com/slavayssiere-spoon/configuratorb\x06proto3'
+  serialized_pb=b'\n\nconf.proto\x12\x0c\x63onfigurator\"\x88\x01\n\x06\x61lerts\x12\x0e\n\x06uptime\x18\x01 \x01(\x04\x12\x10\n\x08\x64owntime\x18\x02 \x01(\x04\x12\x12\n\nalert_list\x18\x03 \x03(\t\x12\x15\n\ralert_connect\x18\x04 \x01(\x08\x12\x18\n\x10\x61lert_disconnect\x18\x05 \x01(\x08\x12\x17\n\x0fonly_workingday\x18\x06 \x01(\x08\">\n\x04\x43onf\x12\x10\n\x08identity\x18\x01 \x01(\t\x12$\n\x06\x61lerts\x18\x02 \x01(\x0b\x32\x14.configurator.alerts2?\n\x0c\x63onfigurator\x12/\n\x03Get\x12\x12.configurator.Conf\x1a\x12.configurator.Conf\"\x00\x42,Z*github.com/slavayssiere-spoon/configuratorb\x06proto3'
 )
 
 
 
 
-_CONF_ALERTS = _descriptor.Descriptor(
+_ALERTS = _descriptor.Descriptor(
   name='alerts',
-  full_name='configurator.Conf.alerts',
+  full_name='configurator.alerts',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='uptime', full_name='configurator.Conf.alerts.uptime', index=0,
+      name='uptime', full_name='configurator.alerts.uptime', index=0,
       number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='downtime', full_name='configurator.Conf.alerts.downtime', index=1,
+      name='downtime', full_name='configurator.alerts.downtime', index=1,
       number=2, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='alert_list', full_name='configurator.Conf.alerts.alert_list', index=2,
+      name='alert_list', full_name='configurator.alerts.alert_list', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='alert_connect', full_name='configurator.Conf.alerts.alert_connect', index=3,
+      name='alert_connect', full_name='configurator.alerts.alert_connect', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='alert_disconnect', full_name='configurator.Conf.alerts.alert_disconnect', index=4,
+      name='alert_disconnect', full_name='configurator.alerts.alert_disconnect', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='only_workingday', full_name='configurator.Conf.alerts.only_workingday', index=5,
+      name='only_workingday', full_name='configurator.alerts.only_workingday', index=5,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -87,9 +87,10 @@ _CONF_ALERTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=56,
-  serialized_end=192,
+  serialized_start=29,
+  serialized_end=165,
 )
+
 
 _CONF = _descriptor.Descriptor(
   name='Conf',
@@ -106,10 +107,17 @@ _CONF = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='alerts', full_name='configurator.Conf.alerts', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[_CONF_ALERTS, ],
+  nested_types=[],
   enum_types=[
   ],
   serialized_options=None,
@@ -118,28 +126,28 @@ _CONF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=29,
-  serialized_end=192,
+  serialized_start=167,
+  serialized_end=229,
 )
 
-_CONF_ALERTS.containing_type = _CONF
+_CONF.fields_by_name['alerts'].message_type = _ALERTS
+DESCRIPTOR.message_types_by_name['alerts'] = _ALERTS
 DESCRIPTOR.message_types_by_name['Conf'] = _CONF
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Conf = _reflection.GeneratedProtocolMessageType('Conf', (_message.Message,), {
+alerts = _reflection.GeneratedProtocolMessageType('alerts', (_message.Message,), {
+  'DESCRIPTOR' : _ALERTS,
+  '__module__' : 'conf_pb2'
+  # @@protoc_insertion_point(class_scope:configurator.alerts)
+  })
+_sym_db.RegisterMessage(alerts)
 
-  'alerts' : _reflection.GeneratedProtocolMessageType('alerts', (_message.Message,), {
-    'DESCRIPTOR' : _CONF_ALERTS,
-    '__module__' : 'conf_pb2'
-    # @@protoc_insertion_point(class_scope:configurator.Conf.alerts)
-    })
-  ,
+Conf = _reflection.GeneratedProtocolMessageType('Conf', (_message.Message,), {
   'DESCRIPTOR' : _CONF,
   '__module__' : 'conf_pb2'
   # @@protoc_insertion_point(class_scope:configurator.Conf)
   })
 _sym_db.RegisterMessage(Conf)
-_sym_db.RegisterMessage(Conf.alerts)
 
 
 DESCRIPTOR._options = None
@@ -151,8 +159,8 @@ _CONFIGURATOR = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=194,
-  serialized_end=257,
+  serialized_start=231,
+  serialized_end=294,
   methods=[
   _descriptor.MethodDescriptor(
     name='Get',

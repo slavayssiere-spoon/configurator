@@ -22,6 +22,37 @@
       "properties": {
         "identity": {
           "type": "string"
+        },
+        "alerts": {
+          "$ref": "#/definitions/configuratoralerts"
+        }
+      }
+    },
+    "configuratoralerts": {
+      "type": "object",
+      "properties": {
+        "uptime": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "downtime": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "alertList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alertConnect": {
+          "type": "boolean"
+        },
+        "alertDisconnect": {
+          "type": "boolean"
+        },
+        "onlyWorkingday": {
+          "type": "boolean"
         }
       }
     },
