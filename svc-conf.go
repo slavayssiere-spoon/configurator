@@ -1,4 +1,4 @@
-package authorizations
+package configurator
 
 import (
 	"context"
