@@ -15,7 +15,7 @@ class configuratorStub(object):
             channel: A grpc.Channel.
         """
         self.Get = channel.unary_unary(
-                '/v1.configurator/Get',
+                '/configurator.configurator/Get',
                 request_serializer=conf__pb2.Conf.SerializeToString,
                 response_deserializer=conf__pb2.Conf.FromString,
                 )
@@ -40,7 +40,7 @@ def add_configuratorServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'v1.configurator', rpc_method_handlers)
+            'configurator.configurator', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -59,7 +59,7 @@ class configurator(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/v1.configurator/Get',
+        return grpc.experimental.unary_unary(request, target, '/configurator.configurator/Get',
             conf__pb2.Conf.SerializeToString,
             conf__pb2.Conf.FromString,
             options, channel_credentials,
