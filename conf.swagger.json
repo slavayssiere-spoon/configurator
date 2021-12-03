@@ -17,6 +17,17 @@
   ],
   "paths": {},
   "definitions": {
+    "configuratorConf": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -41,17 +52,6 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
-        }
-      }
-    },
-    "v1Conf": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
         }
       }
     }
