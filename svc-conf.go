@@ -91,7 +91,7 @@ func (s *ConfService) GetConf(ctx context.Context, usr *Conf) (*Conf, error) {
 		if !ok {
 			logrus.Error("cannot get outgoing data")
 		}
-		logrus.WithFields(logrus.Fields{"usr": usr, "jwt": md.Get("authorization")}).Debug("get authorizations")
+		logrus.WithFields(logrus.Fields{"usr": usr, "jwt": md.Get("authorization")}).Debug("get conf")
 		grp, err := s.Confsvc.Get(metadata.NewOutgoingContext(ctx, md), usr)
 		logrus.WithFields(logrus.Fields{"ctx.err": ctx.Err(), "err": err}).Trace("error ctx get object")
 		if err != nil {
@@ -106,7 +106,7 @@ func (s *ConfService) GetConf(ctx context.Context, usr *Conf) (*Conf, error) {
 			} else if errStatus.Code() == codes.Aborted {
 				s.Confreco <- true
 			} else if errStatus.Code() == codes.Unauthenticated {
-				logrus.WithFields(logrus.Fields{"jwt": md.Get("authorization")}).Info("ws-identity not identified")
+				logrus.WithFields(logrus.Fields{"jwt": md.Get("authorization")}).Info("ws-conf not identified")
 				return nil, status.Error(codes.Unauthenticated, "unauthenticated")
 			} else if errStatus.Code() == codes.InvalidArgument {
 				return nil, status.Errorf(codes.InvalidArgument, "argument invalid %v", err)
@@ -120,5 +120,5 @@ func (s *ConfService) GetConf(ctx context.Context, usr *Conf) (*Conf, error) {
 			return grp, nil
 		}
 	}
-	return nil, status.Errorf(codes.NotFound, "authorization not found")
+	return nil, status.Errorf(codes.NotFound, "conf not found")
 }
