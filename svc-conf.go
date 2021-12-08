@@ -13,6 +13,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
 	lib "gitlab.com/SpoonQIR/Cloud/library/golang-common.git"
@@ -86,6 +87,11 @@ func (s *ConfService) InitConf(authorizationHost string, tracer opentracing.Trac
 
 func (s *ConfService) GetConf(ctx context.Context, usr *Conf) (*Conf, error) {
 	for i := 1; i <= 5; i++ {
+		md, ok := metadata.FromOutgoingContext(ctx)
+		if !ok {
+			logrus.Error("cannot get outgoing data")
+		}
+		logrus.WithFields(logrus.Fields{"usr": usr, "jwt": md.Get("authorization")}).Debug("get conf")
 		grp, err := s.Confsvc.Get(ctx, usr)
 		logrus.WithFields(logrus.Fields{"ctx.err": ctx.Err(), "err": err}).Trace("error ctx get object")
 		if err != nil {
@@ -114,5 +120,5 @@ func (s *ConfService) GetConf(ctx context.Context, usr *Conf) (*Conf, error) {
 			return grp, nil
 		}
 	}
-	return nil, status.Errorf(codes.NotFound, "authorization not found")
+	return nil, status.Errorf(codes.NotFound, "conf not found")
 }
