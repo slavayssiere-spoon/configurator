@@ -13,7 +13,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
 	lib "gitlab.com/SpoonQIR/Cloud/library/golang-common.git"
@@ -87,12 +86,7 @@ func (s *ConfService) InitConf(authorizationHost string, tracer opentracing.Trac
 
 func (s *ConfService) GetConf(ctx context.Context, usr *Conf) (*Conf, error) {
 	for i := 1; i <= 5; i++ {
-		md, ok := metadata.FromOutgoingContext(ctx)
-		if !ok {
-			logrus.Error("cannot get outgoing data")
-		}
-		logrus.WithFields(logrus.Fields{"usr": usr, "jwt": md.Get("authorization")}).Debug("get authorizations")
-		grp, err := s.Confsvc.Get(metadata.NewOutgoingContext(ctx, md), usr)
+		grp, err := s.Confsvc.Get(ctx, usr)
 		logrus.WithFields(logrus.Fields{"ctx.err": ctx.Err(), "err": err}).Trace("error ctx get object")
 		if err != nil {
 			logrus.WithFields(logrus.Fields{"err": err}).Error("error get object")
@@ -106,7 +100,7 @@ func (s *ConfService) GetConf(ctx context.Context, usr *Conf) (*Conf, error) {
 			} else if errStatus.Code() == codes.Aborted {
 				s.Confreco <- true
 			} else if errStatus.Code() == codes.Unauthenticated {
-				logrus.WithFields(logrus.Fields{"jwt": md.Get("authorization")}).Info("ws-identity not identified")
+				logrus.Info("ws-configurator not identified")
 				return nil, status.Error(codes.Unauthenticated, "unauthenticated")
 			} else if errStatus.Code() == codes.InvalidArgument {
 				return nil, status.Errorf(codes.InvalidArgument, "argument invalid %v", err)
