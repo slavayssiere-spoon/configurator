@@ -19,12 +19,23 @@ class configuratorStub(object):
                 request_serializer=conf__pb2.Conf.SerializeToString,
                 response_deserializer=conf__pb2.Conf.FromString,
                 )
+        self.SetAdminConf = channel.unary_unary(
+                '/configurator.configurator/SetAdminConf',
+                request_serializer=conf__pb2.AdminConf.SerializeToString,
+                response_deserializer=conf__pb2.AdminConf.FromString,
+                )
 
 
 class configuratorServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Get(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetAdminConf(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_configuratorServicer_to_server(servicer, server):
                     servicer.Get,
                     request_deserializer=conf__pb2.Conf.FromString,
                     response_serializer=conf__pb2.Conf.SerializeToString,
+            ),
+            'SetAdminConf': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetAdminConf,
+                    request_deserializer=conf__pb2.AdminConf.FromString,
+                    response_serializer=conf__pb2.AdminConf.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class configurator(object):
         return grpc.experimental.unary_unary(request, target, '/configurator.configurator/Get',
             conf__pb2.Conf.SerializeToString,
             conf__pb2.Conf.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetAdminConf(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/configurator.configurator/SetAdminConf',
+            conf__pb2.AdminConf.SerializeToString,
+            conf__pb2.AdminConf.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

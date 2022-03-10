@@ -18,6 +18,12 @@ message Conf {
 	alerts alerts = 2;
 }
 
+message AdminConf {
+	string identity = 1;
+	string subscription = 2;
+}
+
 service configurator {
 	rpc Get (Conf) returns (Conf) {}
+	rpc SetAdminConf (AdminConf) returns (AdminConf) {}
 }
