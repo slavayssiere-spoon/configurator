@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z*github.com/slavayssiere-spoon/configurator',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nconf.proto\x12\x0c\x63onfigurator\"\x88\x01\n\x06\x61lerts\x12\x0e\n\x06uptime\x18\x01 \x01(\x04\x12\x10\n\x08\x64owntime\x18\x02 \x01(\x04\x12\x12\n\nalert_list\x18\x03 \x03(\t\x12\x15\n\ralert_connect\x18\x04 \x01(\x08\x12\x18\n\x10\x61lert_disconnect\x18\x05 \x01(\x08\x12\x17\n\x0fonly_workingday\x18\x06 \x01(\x08\">\n\x04\x43onf\x12\x10\n\x08identity\x18\x01 \x01(\t\x12$\n\x06\x61lerts\x18\x02 \x01(\x0b\x32\x14.configurator.alerts\"3\n\tAdminConf\x12\x10\n\x08identity\x18\x01 \x01(\t\x12\x14\n\x0csubscription\x18\x02 \x01(\t2\x83\x01\n\x0c\x63onfigurator\x12/\n\x03Get\x12\x12.configurator.Conf\x1a\x12.configurator.Conf\"\x00\x12\x42\n\x0cSetAdminConf\x12\x17.configurator.AdminConf\x1a\x17.configurator.AdminConf\"\x00\x42,Z*github.com/slavayssiere-spoon/configuratorb\x06proto3'
+  serialized_pb=b'\n\nconf.proto\x12\x0c\x63onfigurator\"\x88\x01\n\x06\x61lerts\x12\x0e\n\x06uptime\x18\x01 \x01(\x04\x12\x10\n\x08\x64owntime\x18\x02 \x01(\x04\x12\x12\n\nalert_list\x18\x03 \x03(\t\x12\x15\n\ralert_connect\x18\x04 \x01(\x08\x12\x18\n\x10\x61lert_disconnect\x18\x05 \x01(\x08\x12\x17\n\x0fonly_workingday\x18\x06 \x01(\x08\">\n\x04\x43onf\x12\x10\n\x08identity\x18\x01 \x01(\t\x12$\n\x06\x61lerts\x18\x02 \x01(\x0b\x32\x14.configurator.alerts\"3\n\tAdminConf\x12\x10\n\x08identity\x18\x01 \x01(\t\x12\x14\n\x0csubscription\x18\x02 \x01(\t\"5\n\x08\x41utoConf\x12\x10\n\x08identity\x18\x01 \x01(\t\x12\x17\n\x0fnotificationsub\x18\x02 \x01(\t2\xc4\x01\n\x0c\x63onfigurator\x12/\n\x03Get\x12\x12.configurator.Conf\x1a\x12.configurator.Conf\"\x00\x12\x42\n\x0cSetAdminConf\x12\x17.configurator.AdminConf\x1a\x17.configurator.AdminConf\"\x00\x12?\n\x0bSetAutoConf\x12\x16.configurator.AutoConf\x1a\x16.configurator.AutoConf\"\x00\x42,Z*github.com/slavayssiere-spoon/configuratorb\x06proto3'
 )
 
 
@@ -169,10 +169,50 @@ _ADMINCONF = _descriptor.Descriptor(
   serialized_end=282,
 )
 
+
+_AUTOCONF = _descriptor.Descriptor(
+  name='AutoConf',
+  full_name='configurator.AutoConf',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='identity', full_name='configurator.AutoConf.identity', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='notificationsub', full_name='configurator.AutoConf.notificationsub', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=284,
+  serialized_end=337,
+)
+
 _CONF.fields_by_name['alerts'].message_type = _ALERTS
 DESCRIPTOR.message_types_by_name['alerts'] = _ALERTS
 DESCRIPTOR.message_types_by_name['Conf'] = _CONF
 DESCRIPTOR.message_types_by_name['AdminConf'] = _ADMINCONF
+DESCRIPTOR.message_types_by_name['AutoConf'] = _AUTOCONF
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 alerts = _reflection.GeneratedProtocolMessageType('alerts', (_message.Message,), {
@@ -196,6 +236,13 @@ AdminConf = _reflection.GeneratedProtocolMessageType('AdminConf', (_message.Mess
   })
 _sym_db.RegisterMessage(AdminConf)
 
+AutoConf = _reflection.GeneratedProtocolMessageType('AutoConf', (_message.Message,), {
+  'DESCRIPTOR' : _AUTOCONF,
+  '__module__' : 'conf_pb2'
+  # @@protoc_insertion_point(class_scope:configurator.AutoConf)
+  })
+_sym_db.RegisterMessage(AutoConf)
+
 
 DESCRIPTOR._options = None
 
@@ -206,8 +253,8 @@ _CONFIGURATOR = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=285,
-  serialized_end=416,
+  serialized_start=340,
+  serialized_end=536,
   methods=[
   _descriptor.MethodDescriptor(
     name='Get',
@@ -226,6 +273,16 @@ _CONFIGURATOR = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_ADMINCONF,
     output_type=_ADMINCONF,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetAutoConf',
+    full_name='configurator.configurator.SetAutoConf',
+    index=2,
+    containing_service=None,
+    input_type=_AUTOCONF,
+    output_type=_AUTOCONF,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

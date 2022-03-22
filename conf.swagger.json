@@ -23,6 +23,17 @@
         }
       }
     },
+    "configuratorAutoConf": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "type": "string"
+        },
+        "notificationsub": {
+          "type": "string"
+        }
+      }
+    },
     "configuratorConf": {
       "type": "object",
       "properties": {

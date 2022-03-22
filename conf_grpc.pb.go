@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type ConfiguratorClient interface {
 	Get(ctx context.Context, in *Conf, opts ...grpc.CallOption) (*Conf, error)
 	SetAdminConf(ctx context.Context, in *AdminConf, opts ...grpc.CallOption) (*AdminConf, error)
+	SetAutoConf(ctx context.Context, in *AutoConf, opts ...grpc.CallOption) (*AutoConf, error)
 }
 
 type configuratorClient struct {
@@ -52,12 +53,22 @@ func (c *configuratorClient) SetAdminConf(ctx context.Context, in *AdminConf, op
 	return out, nil
 }
 
+func (c *configuratorClient) SetAutoConf(ctx context.Context, in *AutoConf, opts ...grpc.CallOption) (*AutoConf, error) {
+	out := new(AutoConf)
+	err := c.cc.Invoke(ctx, "/configurator.configurator/SetAutoConf", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConfiguratorServer is the server API for Configurator service.
 // All implementations must embed UnimplementedConfiguratorServer
 // for forward compatibility
 type ConfiguratorServer interface {
 	Get(context.Context, *Conf) (*Conf, error)
 	SetAdminConf(context.Context, *AdminConf) (*AdminConf, error)
+	SetAutoConf(context.Context, *AutoConf) (*AutoConf, error)
 	mustEmbedUnimplementedConfiguratorServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedConfiguratorServer) Get(context.Context, *Conf) (*Conf, error
 }
 func (UnimplementedConfiguratorServer) SetAdminConf(context.Context, *AdminConf) (*AdminConf, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetAdminConf not implemented")
+}
+func (UnimplementedConfiguratorServer) SetAutoConf(context.Context, *AutoConf) (*AutoConf, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAutoConf not implemented")
 }
 func (UnimplementedConfiguratorServer) mustEmbedUnimplementedConfiguratorServer() {}
 
@@ -120,6 +134,24 @@ func _Configurator_SetAdminConf_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Configurator_SetAutoConf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AutoConf)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConfiguratorServer).SetAutoConf(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/configurator.configurator/SetAutoConf",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConfiguratorServer).SetAutoConf(ctx, req.(*AutoConf))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Configurator_ServiceDesc is the grpc.ServiceDesc for Configurator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var Configurator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetAdminConf",
 			Handler:    _Configurator_SetAdminConf_Handler,
+		},
+		{
+			MethodName: "SetAutoConf",
+			Handler:    _Configurator_SetAutoConf_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

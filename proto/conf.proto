@@ -23,7 +23,13 @@ message AdminConf {
 	string subscription = 2;
 }
 
+message AutoConf {
+	string identity = 1;
+	string notificationsub = 2;
+}
+
 service configurator {
 	rpc Get (Conf) returns (Conf) {}
 	rpc SetAdminConf (AdminConf) returns (AdminConf) {}
+	rpc SetAutoConf (AutoConf) returns (AutoConf) {}
 }
