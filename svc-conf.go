@@ -160,3 +160,41 @@ func (s *ConfService) SetAdminConf(ctx context.Context, usr *AdminConf) (*AdminC
 	}
 	return nil, status.Errorf(codes.NotFound, "conf not found")
 }
+
+func (s *ConfService) SetAutoConf(ctx context.Context, usr *AutoConf) (*AutoConf, error) {
+	for i := 1; i <= 5; i++ {
+		md, ok := metadata.FromOutgoingContext(ctx)
+		if !ok {
+			logrus.Error("cannot get outgoing data")
+		}
+		logrus.WithFields(logrus.Fields{"usr": usr, "jwt": md.Get("authorization")}).Debug("set auto conf")
+		grp, err := s.Confsvc.SetAutoConf(ctx, usr)
+		logrus.WithFields(logrus.Fields{"ctx.err": ctx.Err(), "err": err}).Trace("error ctx get object")
+		if err != nil {
+			logrus.WithFields(logrus.Fields{"err": err}).Error("error get object")
+			errStatus, _ := status.FromError(err)
+			if errStatus.Code() == codes.Unavailable {
+				s.Confreco <- true
+			} else if errStatus.Code() == codes.Canceled {
+				s.Confreco <- true
+			} else if errStatus.Code() == codes.DeadlineExceeded {
+				s.Confreco <- true
+			} else if errStatus.Code() == codes.Aborted {
+				s.Confreco <- true
+			} else if errStatus.Code() == codes.Unauthenticated {
+				logrus.Info("ws-configurator not identified")
+				return nil, status.Error(codes.Unauthenticated, "unauthenticated")
+			} else if errStatus.Code() == codes.InvalidArgument {
+				return nil, status.Errorf(codes.InvalidArgument, "argument invalid %v", err)
+			} else if errStatus.Code() == codes.NotFound {
+				return nil, nil
+			}
+			// errStatus.Code() == codes.Internal = retry
+		} else if ctx.Err() != nil {
+			s.Confreco <- true
+		} else {
+			return grp, nil
+		}
+	}
+	return nil, status.Errorf(codes.NotFound, "conf not found")
+}
